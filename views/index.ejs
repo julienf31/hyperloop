@@ -2,8 +2,12 @@
 <html lang="en">
 <% include parts/header.ejs %>
 <body>
-<h1>Hello, world!</h1>
+<% include parts/menu.ejs %>
+<h1>Liste des stations de la ligne : <%= line.name %></h1>
 
+<% line.stations.forEach(function (station) { %>
+    <%= station.name %><br>
+<% })%>
 <% include parts/footer.ejs %>
 </body>
 </html>
