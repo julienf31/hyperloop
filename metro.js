@@ -1,5 +1,5 @@
 var metro = {
-    name: 'metro',
+    name: 'metro1',
     length: 2,
     capacity: 200,
     speed: 60,
