@@ -5,5 +5,5 @@ var metro = {
     speed: 60,
     numero: 243,
     faulty: false,
-    status: move
+    status: ''
 }
