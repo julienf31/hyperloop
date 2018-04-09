@@ -7,6 +7,10 @@ var line = {
         {id: 3,name: 'Patachou'},
         {id: 4,name: 'Poire au pinot'},
         {id: 5,name: 'Rue de la paix'},
+        {id: 6,name: 'Le verger des muses'},
+        {id: 7,name: 'Tripes de peaux'},
+        {id: 7,name: 'L\'averse Géante'},
+        {id: 8,name: 'Belle-Isle-En-Terre'},
         ]
 }
 
