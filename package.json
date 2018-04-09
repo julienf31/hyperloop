@@ -1,0 +1,22 @@
+{
+  "name": "hyperloop",
+  "version": "1.0.0",
+  "description": "Project B2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julienf31/hyperloop.git"
+  },
+  "author": "HyperLoop's Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julienf31/hyperloop/issues"
+  },
+  "homepage": "https://github.com/julienf31/hyperloop#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
