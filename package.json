@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/julienf31/hyperloop#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "bootstrap": "^4.0.0",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1"
   }
 }
