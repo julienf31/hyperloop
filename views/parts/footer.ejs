@@ -2,10 +2,4 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/socket.io.js"></script>
-<script>
-    var socket = io.connect('http://10.31.0.60:8080');
-    socket.on('connect', function(data) {
-        socket.emit('join', 'Hello World from client');
-    });
-</script>
+<script src="/socket.io/socket.io.js"></script>

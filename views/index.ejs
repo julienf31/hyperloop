@@ -8,6 +8,72 @@
 <% line.stations.forEach(function (station) { %>
     <%= station.name %><br>
 <% })%>
+<style>
+    .metro{
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        background-color: red;
+        text-align: center;
+        display: block;
+        line-height: 50px;
+        position: absolute;
+        left: 0;
+        -webkit-transition: left 10s;
+        -moz-transition: left 1s;
+        -ms-transition: left 1s;
+        -o-transition: left 1s;
+        transition: left 1s;
+    }
+</style>
+<div id="metro-1" class="metro">
+    1
+</div>
+
+
+<div class="clearfix">
+
+    <div id="jauge" class="c100 small">
+        <span><span id="speed"></span> Km/h</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+
+</div>
+
+Dist : <span id="distance"></span> m
 <% include parts/footer.ejs %>
 </body>
 </html>
+
+<script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('connect', function(data) {
+        socket.emit('join', 'Hello World from client');
+    });
+
+    socket.on('close', function (data) {
+        console.log('closing door of metro ' + data);
+        $("#metro-"+data).css('background-color', 'green');
+        var left = parseInt($("#metro-"+data).css('left'));
+        $("#metro-"+data).css('left', left+50);
+    });
+
+    socket.on('open', function (data) {
+        console.log('opening door of metro ' + data);
+        $("#metro-"+data).css('background-color', 'red');
+    });
+
+    socket.on('speed', function (data) {
+        $("#speed").html(Math.round(data))
+        $("#jauge").removeClass().addClass('c100 p'+Math.round((Math.round(data,-1)*100)/60,-1)+' small');
+    })
+
+    socket.on('dist', function (data) {
+        $("#distance").html(Math.round(data))
+    })
+</script>
