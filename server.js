@@ -16,7 +16,7 @@ port.on('open', function(){
     port.on('data', function(data){
         if(data[0] == 1){
             io.emit('close', 1 , function () {
-                metro.speed(2000)
+                metro.speed(200)
             })
         }if(data[0] == 2){
             io.emit('open', 1)
@@ -46,7 +46,7 @@ io.on('connection', function(socket) {
 
 app.get('/', function(req,res){
     res.render('index', { line: line.line})
-    metro.speed(1000, io)
+    metro.speed(100, io)
 
 })
 

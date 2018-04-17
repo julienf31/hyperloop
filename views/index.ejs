@@ -33,7 +33,10 @@
 </div>
 
 
-<div class="clearfix">
+
+
+
+<div class="mt-5">
 
     <div id="jauge" class="c100 small">
         <span><span id="speed"></span> Km/h</span>
@@ -42,10 +45,9 @@
             <div class="fill"></div>
         </div>
     </div>
-
-</div>
-
 Dist : <span id="distance"></span> m
+Dist : <span id="distance-p"></span> %
+</div>
 <% include parts/footer.ejs %>
 </body>
 </html>
@@ -73,7 +75,8 @@ Dist : <span id="distance"></span> m
         $("#jauge").removeClass().addClass('c100 p'+Math.round((Math.round(data,-1)*100)/60,-1)+' small');
     })
 
-    socket.on('dist', function (data) {
-        $("#distance").html(Math.round(data))
+    socket.on('dist', function (dist, percent) {
+        $("#distance").html(Math.round(dist))
+        $("#distance-p").html(Math.round(percent))
     })
 </script>

@@ -41,14 +41,21 @@ speed = function(dist, io) {
                 //console.log('dist : ' + curDist)
             }
             io.emit('speed', msToKmh(curSpeed))
-            io.emit('dist', curDist)
+            io.emit('dist', curDist, percentAchieved(curDist,dist))
         }
         else{
+            curSpeed = 0;
+            io.emit('speed', msToKmh(curSpeed))
             console.log('Arrived to station')
             clearInterval(interval)
         }
     }, dT*1000)
 
+}
+
+// Get avancement in %
+function percentAchieved(value, target){
+    return (100*value) / target
 }
 
 // Approximation de la distance d'arret
