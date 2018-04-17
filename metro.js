@@ -25,13 +25,13 @@ speed = function(dist, io) {
             if(distToStop(curSpeed) >= dist - curDist){
                 //console.log('braking phase')
                 curDist += curSpeed*dT + ((brake)*(dT*dT))/2
-                curSpeed -= 1*dT
+                curSpeed += brake*dT
                 //console.log('speed : ' + curSpeed)
                 //console.log('dist : ' + curDist)
             }else if(curSpeed < maxSpeed){
                 // ACCELERATION
                 curDist += curSpeed*dT + ((acceleration)*(dT*dT))/2
-                curSpeed += 1*dT
+                curSpeed += acceleration*dT
                 //console.log('acceleration')
                 //console.log('speed : ' + curSpeed)
                 //console.log('dist : ' + curDist)
