@@ -13,7 +13,7 @@ var metro = {
 };
 
 
-speed = function(dist, io) {
+speed = function(dist, io, callback) {
     maxSpeed = kmhToMs(metro.speed);
     curPhase = 'stop';
     curDist = 0;
@@ -47,6 +47,7 @@ speed = function(dist, io) {
             curPhase = 'stop'
             io.emit('speed', msToKmh(curSpeed), curPhase)
             console.log('Arrived to station')
+            callback()
             clearInterval(interval)
         }
     }, dT*1000)

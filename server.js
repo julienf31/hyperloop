@@ -49,9 +49,10 @@ app.get('/', function(req,res){
     currStation = 2;
     nextStation = line.nextStation(currStation,0)
     console.log(nextStation)
-    dist = line.distToNext(currStation, 0)
-    console.log(dist)
-    metro.speed(dist, io)
+    metro.speed(nextStation.nextStation, io, function() {
+        currStation = nextStation
+        console.log(currStation)
+    })
 
     
 
