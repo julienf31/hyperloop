@@ -54,12 +54,27 @@ var line = {
     ]
 }
 
+function nextStation(id, direction) {
+    if (direction == 0) {
+        if(id+1>line.stations.length) {
+            return line.stations[id-1];
+        }
+        return line.stations[id];
+    }
+    else{
+        if (id-1 < 0) {
+            return line.stations[id+1];
+        }
+        return line.stations[id-1];
+    }
+}
+
 function distToNext(id, direction) {
     if (direction == 0) {
         if(id+1>line.stations.length) {
         return line.stations[id-1].nextStation;
         }
-        return line.stations[id+1].nextStation;
+        return line.stations[id].nextStation;
     }
     else{
        if (id-1 < 0) {
@@ -71,3 +86,4 @@ function distToNext(id, direction) {
 
 exports.line = line
 exports.distToNext = distToNext
+exports.nextStation = nextStation
