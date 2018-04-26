@@ -70,9 +70,15 @@ Dist : <span id="distance-p"></span> %
         $("#metro-"+data).css('background-color', 'red');
     });
 
-    socket.on('speed', function (data) {
+    socket.on('speed', function (data, phase) {
+        color = null;
+        switch (phase){
+            case 'acceleration' : color = 'green'; break;
+            case 'cruise' : color = ''; break;
+            case 'brake' : color = 'orange'; break;
+        }
         $("#speed").html(Math.round(data))
-        $("#jauge").removeClass().addClass('c100 p'+Math.round((Math.round(data,-1)*100)/60,-1)+' small');
+        $("#jauge").removeClass().addClass('c100 p'+Math.round((Math.round(data,-1)*100)/60,-1)+' small ' + color);
     })
 
     socket.on('dist', function (dist, percent) {

@@ -46,7 +46,7 @@ io.on('connection', function(socket) {
 
 app.get('/', function(req,res){
     res.render('index', { line: line.line})
-    metro.speed(50, io)
+    metro.speed(1000, io)
 
 })
 

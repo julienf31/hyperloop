@@ -14,6 +14,7 @@ var metro = {
 
 speed = function(dist, io) {
     maxSpeed = kmhToMs(metro.speed);
+    curPhase = 'stop';
     curDist = 0;
     curSpeed = 0;
     acceleration = metro.acceleration;
@@ -23,29 +24,27 @@ speed = function(dist, io) {
     var interval = setInterval(function () {
         if(curDist < dist){
             if(distToStop(curSpeed) >= dist - curDist){
-                //console.log('braking phase')
+                //BRAKE
+                curPhase = 'brake'
                 curDist += curSpeed*dT + ((brake)*(dT*dT))/2
                 curSpeed += brake*dT
-                //console.log('speed : ' + curSpeed)
-                //console.log('dist : ' + curDist)
             }else if(curSpeed < maxSpeed){
                 // ACCELERATION
+                curPhase = 'acceleration'
                 curDist += curSpeed*dT + ((acceleration)*(dT*dT))/2
                 curSpeed += acceleration*dT
-                //console.log('acceleration')
-                //console.log('speed : ' + curSpeed)
-                //console.log('dist : ' + curDist)
             }else{
+                //CRUISE
+                curPhase = 'cruise'
                 curDist += curSpeed*dT
-                //console.log('speed : ' + curSpeed)
-                //console.log('dist : ' + curDist)
             }
-            io.emit('speed', msToKmh(curSpeed))
+            io.emit('speed', msToKmh(curSpeed), curPhase)
             io.emit('dist', curDist, percentAchieved(curDist,dist))
         }
         else{
             curSpeed = 0;
-            io.emit('speed', msToKmh(curSpeed))
+            curPhase = 'stop'
+            io.emit('speed', msToKmh(curSpeed), curPhase)
             console.log('Arrived to station')
             clearInterval(interval)
         }
