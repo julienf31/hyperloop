@@ -46,7 +46,12 @@ io.on('connection', function(socket) {
 
 app.get('/', function(req,res){
     res.render('index', { line: line.line})
-    metro.speed(1000, io)
+    currStation = 2;
+    dist = line.distToNext(currStation, 0)
+    console.log(dist)
+    metro.speed(dist, io)
+
+    
 
 })
 
@@ -68,4 +73,4 @@ app.post('/door/:id/:status', function (req, res) {
     }
 })
 
-server.listen(8080)
+server.listen(8081)

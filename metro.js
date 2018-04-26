@@ -8,7 +8,8 @@ var metro = {
     position: 1,
     acceleration: 1,
     brake: -1,
-    emmergecyBrake: -3
+    emmergecyBrake: -3,
+    direction :0  // 0 : sens de 1 à 9; 1 
 };
 
 
