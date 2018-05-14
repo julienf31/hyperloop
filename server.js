@@ -42,19 +42,29 @@ io.on('connection', function(socket) {
         io.emit('close', data)
         console.log('closing door of metro : ' + data);
     })
+
+    socket.on('start', function () {
+        console.log('start')
+        direction = metro.metro.direction
+        console.log(direction)
+        currStation = line.line.stations[metro.metro.station];
+        nextStation = line.nextStation(currStation.id,direction)
+        console.log('currStation : ' + currStation.name)
+        console.log('next : ' + nextStation.name)
+        metro.speed(line.getDist(currStation.id,0), io, function() {
+            currStation = nextStation
+            metro.metro.station = currStation.id
+            console.log('currStation : ' + currStation.name)
+
+        })
+        io.emit('start', currStation, nextStation)
+    })
 })
 
 app.get('/', function(req,res){
     res.render('index', { line: line.line})
-    currStation = 2;
-    nextStation = line.nextStation(currStation,0)
-    console.log(nextStation)
-    metro.speed(nextStation.nextStation, io, function() {
-        currStation = nextStation
-        console.log(currStation)
-    })
-
-    
+    direction = metro.direction
+    console.log(direction)
 
 })
 

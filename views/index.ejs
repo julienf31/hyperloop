@@ -3,7 +3,9 @@
 <% include parts/header.ejs %>
 <body>
 <% include parts/menu.ejs %>
+<div class="container">
 <h1>Liste des stations de la ligne : <%= line.name %></h1>
+
 
 <% line.stations.forEach(function (station) { %>
     <%= station.name %><br>
@@ -28,13 +30,14 @@
         transition: left 1s;
     }
 </style>
-<div id="metro-1" class="metro">
-    1
+<div id="infos">
+    <h2>Station : <span id="currStation"></span></h2>
+    <h2>Prochaine Station : <span id="nextStation"></span></h2>
 </div>
 
-
-
-
+<div class="menu">
+    <button id="start" type="button" class="btn btn-success">Démarer</button>
+</div>
 
 <div class="mt-5">
 
@@ -47,6 +50,7 @@
     </div>
 Dist : <span id="distance"></span> m
 Dist : <span id="distance-p"></span> %
+</div>
 </div>
 <% include parts/footer.ejs %>
 </body>
@@ -84,5 +88,14 @@ Dist : <span id="distance-p"></span> %
     socket.on('dist', function (dist, percent) {
         $("#distance").html(Math.round(dist))
         $("#distance-p").html(Math.round(percent))
+    })
+
+    $("#start").on('click', function () {
+        socket.emit('start')
+    })
+
+    socket.on('start', function (current, next) {
+        $("#currStation").html(current.name)
+        $("#nextStation").html(next.name)
     })
 </script>
