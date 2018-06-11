@@ -8,22 +8,26 @@ var metro = require('./metro.js')
 var line = require('./line.js')
 
 var SerialPort = require("serialport");
+const Readline = require('@serialport/parser-readline')
+
 var port = new SerialPort("/dev/cu.usbmodem1421");
+const parser = port.pipe(new Readline());
 
 
 port.on('open', function(){
-    console.log('Serial Port Opend');
-    port.on('data', function(data){
+    console.log('Serial Port Open');
+    parser.on('data', function(data){
         if(data[0] == 1){
-            io.emit('close', 1 , function () {
-                metro.speed(200)
-            })
+            launch()
+            console.log('close 1')
         }if(data[0] == 2){
             io.emit('open', 1)
         }
-        console.log('data recieved' + data[0]);
+        console.log('data recieved' + data);
     });
 });
+
+
 
 app.set('view engine', 'ejs');
 
@@ -41,25 +45,31 @@ io.on('connection', function(socket) {
     socket.on('close', function (data) {
         io.emit('close', data)
         console.log('closing door of metro : ' + data);
+        socket.emit('start')
     })
 
     socket.on('start', function () {
-        console.log('start')
-        direction = metro.metro.direction
-        console.log(direction)
-        currStation = line.line.stations[metro.metro.station];
-        nextStation = line.nextStation(currStation.id,direction)
-        console.log('currStation : ' + currStation.name)
-        console.log('next : ' + nextStation.name)
-        metro.speed(line.getDist(currStation.id,0), io, function() {
-            currStation = nextStation
-            metro.metro.station = currStation.id
-            console.log('currStation : ' + currStation.name)
-
-        })
-        io.emit('start', currStation, nextStation)
+        launch()
     })
 })
+
+
+var launch = function () {
+    console.log('start')
+    direction = metro.metro.direction
+    console.log(direction)
+    currStation = line.line.stations[metro.metro.station];
+    nextStation = line.nextStation(currStation.id,direction)
+    console.log('currStation : ' + currStation.name)
+    console.log('next : ' + nextStation.name)
+    metro.speed(line.getDist(currStation.id,0), io, function() {
+        currStation = nextStation
+        metro.metro.station = currStation.id
+        console.log('currStation : ' + currStation.name)
+
+    })
+    io.emit('start', currStation, nextStation)
+}
 
 app.get('/', function(req,res){
     res.render('index', { line: line.line})

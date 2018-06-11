@@ -1,6 +1,6 @@
 var metro = {
     name: 'metroglou',
-    length: 2,
+    length: 3,
     capacity: 200,
     speed: 60,
     numero: 243,
@@ -10,7 +10,7 @@ var metro = {
     brake: -1,
     emmergecyBrake: -3,
     direction : 0,  // 0 : sens de 1 à 9; 1
-    station: 8
+    station: 0
 };
 
 
