@@ -11,7 +11,7 @@
 
 
         <% line.stations.forEach(function (station) { %>
-          <%= station.name %><br>
+          <%= station.name %><span id="station-<%= station.id %>"></span><br>
             <% })%>
               <style>
                 .metro {
