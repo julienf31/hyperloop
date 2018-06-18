@@ -10,6 +10,7 @@ var line = require('./line.js')
 var SerialPort = require("serialport");
 const Readline = require('@serialport/parser-readline')
 
+
 var port = new SerialPort("/dev/cu.usbmodem1421");
 const parser = port.pipe(new Readline());
 
@@ -66,21 +67,21 @@ io.on('connection', function(socket) {
 })
 
 
-var launch = function () {
-    console.log('start')
-    direction = metro.metro.direction
-    console.log(direction)
-    currStation = line.line.stations[metro.metro.station];
-    nextStation = line.nextStation(currStation.id,direction)
+var launch = function() {
+  console.log('start')
+  direction = metro.metro.direction
+  console.log(direction)
+  currStation = line.line.stations[metro.metro.station];
+  nextStation = line.nextStation(currStation.id, direction)
+  console.log('currStation : ' + currStation.name)
+  console.log('next : ' + nextStation.name)
+  metro.speed(line.getDist(currStation.id, 0), io, function() {
+    currStation = nextStation
+    metro.metro.station = currStation.id
     console.log('currStation : ' + currStation.name)
-    console.log('next : ' + nextStation.name)
-    metro.speed(line.getDist(currStation.id,0), io, function() {
-        currStation = nextStation
-        metro.metro.station = currStation.id
-        console.log('currStation : ' + currStation.name)
 
-    })
-    io.emit('start', currStation, nextStation)
+  })
+  io.emit('start', currStation, nextStation)
 }
 
 app.get('/', function(req, res) {

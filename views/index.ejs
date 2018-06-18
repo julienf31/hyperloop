@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" type="text/html" href="/public/css/style.css">
 
 <% include parts/header.ejs %>
 
@@ -33,10 +33,6 @@
                   transition: left 1s;
                 }
               </style>
-              <div id="infos">
-                <h2>Station : <span id="currStation"></span></h2>
-                <h2>Prochaine Station : <span id="nextStation"></span></h2>
-              </div>
 
               <div class="menu">
                 <button id="start" type="button" class="btn btn-success">Démarer</button>
@@ -54,7 +50,20 @@
                 Dist : <span id="distance"></span> m Dist : <span id="distance-p"></span> %
               </div>
       </div>
+
+      <div class="progress-container">
+        <ul>
+          <div class="namemetro">Station : <span id="currStation"></span></div>
+          <li class="buttonmetro"></li>
+          <div class="namemetrotwo">Prochaine Station : <span id="nextStation"></span></div>
+          <li class="buttonmetrotwo"></li>
+        </ul>
+        <div class="progress-bar"></div>
+      </div>
+      <!-- <div class="progress-bar"></div> -->
+
       <% include parts/footer.ejs %>
+
   </body>
 
 </html>
@@ -97,6 +106,9 @@
   socket.on('dist', function(dist, percent) {
     $("#distance").html(Math.round(dist))
     $("#distance-p").html(Math.round(percent))
+    $('.progress-bar').css({
+      width: Math.round(percent) + "%"
+    });
   })
 
   $("#start").on('click', function() {
