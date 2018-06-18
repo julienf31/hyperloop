@@ -8,8 +8,10 @@ var metro = require('./metro.js')
 var line = require('./line.js')
 
 var SerialPort = require("serialport");
-var port = new SerialPort("/dev/cu.usbmodem1421");
+const Readline = require('@serialport/parser-readline')
 
+var port = new SerialPort("/dev/cu.usbmodem1421");
+const parser = port.pipe(new Readline());
 
 port.on('open', function() {
   console.log('Serial Port Opend');
@@ -26,6 +28,8 @@ port.on('open', function() {
   });
 });
 
+
+
 app.set('view engine', 'ejs');
 
 app.use('/asset', express.static(__dirname + '/public'));
@@ -38,7 +42,6 @@ io.on('connection', function(socket) {
     console.log('Client connected...')
     console.log(data);
   })
-
   socket.on('close', function(data) {
     io.emit('close', data)
     console.log('closing door of metro : ' + data);
@@ -61,6 +64,24 @@ io.on('connection', function(socket) {
     io.emit('start', currStation, nextStation)
   })
 })
+
+
+var launch = function () {
+    console.log('start')
+    direction = metro.metro.direction
+    console.log(direction)
+    currStation = line.line.stations[metro.metro.station];
+    nextStation = line.nextStation(currStation.id,direction)
+    console.log('currStation : ' + currStation.name)
+    console.log('next : ' + nextStation.name)
+    metro.speed(line.getDist(currStation.id,0), io, function() {
+        currStation = nextStation
+        metro.metro.station = currStation.id
+        console.log('currStation : ' + currStation.name)
+
+    })
+    io.emit('start', currStation, nextStation)
+}
 
 app.get('/', function(req, res) {
   res.render('index', {

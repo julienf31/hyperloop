@@ -1,6 +1,6 @@
 var metro = {
     name: 'metroglou',
-    length: 2,
+    length: 3,
     capacity: 200,
     speed: 60,
     numero: 243,
@@ -10,9 +10,9 @@ var metro = {
     brake: -1,
     emmergecyBrake: -3,
     direction : 0,  // 0 : sens de 1 à 9; 1
-    station: 8
+    station: 0,
+    emergency: 0
 };
-
 
 speed = function(dist, io, callback) {
     maxSpeed = kmhToMs(metro.speed);
@@ -24,6 +24,7 @@ speed = function(dist, io, callback) {
     dT = .01;
 
     var interval = setInterval(function () {
+        console.log('Parcouru : ' + curDist + ' / ' + dist)
         if(curDist < dist){
             if(distToStop(curSpeed) >= dist - curDist){
                 //BRAKE
