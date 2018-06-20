@@ -164,6 +164,14 @@ h4 {
   transition: width 1s ease-in-out;
 }
 
+.progress-bar::after{
+  text-align: right;
+  content: '🚃';
+  font-size: 30px;
+  z-index: 100;
+  margin-right: -20px;
+  margin-top: -4px;
+}
 .buttons {
   margin: 20px auto;
   padding: 10px;
