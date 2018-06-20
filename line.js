@@ -65,24 +65,26 @@ var line = {
 }
 
 function nextStation(id, direction) {
-    if (direction == 0) {
+    if (!direction) {
         if(id+1>line.stations.length) {
             return line.stations[id-1];
+        } else {
+            console.log('forward')
+            return line.stations[id+1];
         }
-        console.log('forward')
-        return line.stations[id+1];
     }
     else{
         if (id-1 < 0) {
             return line.stations[id+1];
+        } else {
+            console.log('backward')
+            return line.stations[id-1];
         }
-        console.log('backward')
-        return line.stations[id-1];
     }
 }
 
 function getDist(id,direction){
-    if (direction == 0) {
+    if (!direction) {
         if(id+1>line.stations.length) {
             return line.stations[id-1].nextStation;
         }
