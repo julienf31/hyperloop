@@ -3,19 +3,19 @@ var line = {
     stations: [
         {
             id: 0,
-            name: 'Parachute 1',
-            previousStation : 10,
-            nextStation : 10
+            name: 'Parachute',
+            previousStation : 100,
+            nextStation : 100
         },
         {
             id: 1,
-            name: 'Le Pénitentier 2',
-            previousStation : 10,
+            name: 'Le Pénitentier',
+            previousStation : 100,
             nextStation : 150
         },
         {
             id: 2,
-            name: 'Opéra 3',
+            name: 'Opéra',
             previousStation : 150,
             nextStation : 200
         },

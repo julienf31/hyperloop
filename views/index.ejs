@@ -29,10 +29,6 @@
             transition: left 1s;
         }
     </style>
-    <div id="infos">
-        <h2>Station : <span id="currStation"></span></h2>
-        <h2>Prochaine Station : <span id="nextStation"></span></h2>
-    </div>
     <% line.stations.forEach(function (station) { %>
     <%= station.name %><span id="station-<%= station.id %>"></span><br>
     <% }) %>
@@ -53,6 +49,7 @@
             -moz-transition: left 1s;
             -ms-transition: left 1s;
             -o-transition: left 1s;
+
             transition: left 1s;
         }
     </style>
@@ -61,7 +58,6 @@
         <button id="start" type="button" class="btn btn-success">Démarrer</button>
         <button id="emergency" type="button" class="btn btn-danger">Arrêt d'urgence</button>
     </div>
-
 
     <div class="mt-5">
 
