@@ -56,27 +56,9 @@ io.on('connection', function (socket) {
     })
 
     socket.on('start', function () {
-        if (metro.metro.station == line.line.stations[line.line.stations.length - 1].id || metro.metro.station == line.line.stations[0].id) {
-            metro.metro.direction = !metro.metro.direction
-        }
-        else {
-            metro.metro.direction = metro.metro.direction
-        }
-        direction = metro.metro.direction;
-        currStation = line.line.stations[metro.metro.station];
-        nextStation = line.nextStation(currStation.id, direction)
-        console.log('currStation : ' + currStation.name)
-        console.log('next : ' + nextStation.name)
-        metro.speed(line.getDist(currStation.id, direction), io, function () {
-            currStation = nextStation
-            metro.metro.station = currStation.id
-            console.log('currStation : ' + currStation.name)
-
-        })
-
-
-        io.emit('start', currStation, nextStation)
+        launch()
     })
+
     socket.on('emergency', function () {
         metro.metro.emergency = true
         console.log('emmergency')
@@ -84,19 +66,25 @@ io.on('connection', function (socket) {
 })
 
 var launch = function() {
-  console.log('start')
-  direction = metro.metro.direction
-  console.log(direction)
-  currStation = line.line.stations[metro.metro.station];
-  nextStation = line.nextStation(currStation.id, direction)
-  console.log('currStation : ' + currStation.name)
-  console.log('next : ' + nextStation.name)
-  metro.speed(line.getDist(currStation.id, 0), io, function() {
-    currStation = nextStation
-    metro.metro.station = currStation.id
+    if (metro.metro.station == line.line.stations[line.line.stations.length - 1].id || metro.metro.station == line.line.stations[0].id) {
+        metro.metro.direction = !metro.metro.direction
+    }
+    else {
+        metro.metro.direction = metro.metro.direction
+    }
+    direction = metro.metro.direction;
+    currStation = line.line.stations[metro.metro.station];
+    nextStation = line.nextStation(currStation.id, direction)
     console.log('currStation : ' + currStation.name)
-  })
-  io.emit('start', currStation, nextStation)
+    console.log('next : ' + nextStation.name)
+    metro.speed(line.getDist(currStation.id, direction), io, function () {
+        currStation = nextStation
+        metro.metro.station = currStation.id
+        console.log('currStation : ' + currStation.name)
+
+    })
+
+    io.emit('start', currStation, nextStation)
 }
 
 app.get('/', function (req, res) {
