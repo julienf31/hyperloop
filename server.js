@@ -20,6 +20,8 @@ const Readline = require('@serialport/parser-readline')
 var port = new SerialPort("/dev/cu.usbmodem1421");
 const parser = port.pipe(new Readline());
 
+
+
 port.on('open', function () {
     console.log('Serial Port Opend');
     port.on('data', function (data) {
