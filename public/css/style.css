@@ -242,6 +242,14 @@ h4 {
   background: #919191;
 }
 
+.buttondem:active {
+  background: #919191;
+}
+
+.buttondem:focus {
+  background: #919191;
+}
+
 /* .navhead {
   position: relative;
   color: #FFF;

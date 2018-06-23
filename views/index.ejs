@@ -6,6 +6,15 @@
 
   <body>
     <% include parts/menu.ejs %>
+
+      <!-- <button onclick="myFunction()">Cliquez pour voir notre métro</button>
+
+      <div id="myDIV" class="hide">
+        <img src="../public/assets/metroprojet.png" alt="">
+      </div> -->
+      <!-- <div class="imgheader">
+      <img src="../../public/assets/img/header.jpg" alt="footer">
+    </div> -->
       <div class="container">
         <h1>Liste des stations de la ligne : <%= line.name %></h1>
 
@@ -73,6 +82,10 @@
 
       </div>
 
+      <!-- <div class="imgfooter">
+        <img src="../../public/assets/img/footer.jpg" alt="footer">
+      </div> -->
+
       <div class="progress-container">
         <ul>
           <div class="namemetro">Station : <span id="currStation"></span></div>
@@ -85,7 +98,6 @@
       <!-- <div class="progress-bar"></div> -->
 
       <% include parts/footer.ejs %>
-
   </body>
 
 </html>
@@ -154,4 +166,13 @@
     $("#currStation").html(current.name)
     $("#nextStation").html(next.name)
   })
+
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
 </script>
