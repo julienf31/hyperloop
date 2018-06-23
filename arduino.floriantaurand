@@ -1,0 +1,46 @@
+/*
+  Writing to Serial Port
+  Writes a digital input on pin 2 into the serial
+
+  This example code is in the public domain.
+ */
+
+// digital pin 2 has a pushbutton attached to it.
+int pushButton = 2;
+const int L1 = 6; // broche 2 du micro-contrôleur se nomme maintenant : L1
+
+// the setup routine runs once when you press reset:
+void setup() {
+  pinMode(L1, OUTPUT); //L1 est une broche de sortie
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+  Serial.println("azerty");
+  // make the pushbutton's pin an input:
+  pinMode(pushButton, INPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input pin:
+  int buttonState = digitalRead(pushButton);
+  // print out the state of the button into the serial port:
+  if(buttonState == HIGH){
+    Serial.write(1);
+    //Serial.println("a");
+    digitalWrite(L1, HIGH); //allumer L1
+    delay(1000); // attendre 1 seconde
+    digitalWrite(L1, LOW); // Eteindre L1
+    Serial.write(2);
+  }else{
+    //Serial.write(0);
+  }
+
+   // send data only when you receive data:
+   if (Serial.available() > 0) {
+    // read the incoming byte:
+    digitalWrite(L1, HIGH); //allumer L1
+    delay(1000); // attendre 1 seconde
+    digitalWrite(L1, LOW); // Eteindre L1
+    }
+  delay(100);
+}
