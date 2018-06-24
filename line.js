@@ -5,61 +5,78 @@ var line = {
             id: 0,
             name: 'Parachute',
             previousStation : 100,
-            nextStation : 100
+            nextStation : 100,
+            garage: false,
         },
         {
             id: 1,
             name: 'Le Pénitentier',
             previousStation : 100,
-            nextStation : 150
+            nextStation : 150,
+            garage: false,
         },
         {
             id: 2,
             name: 'Opéra',
             previousStation : 150,
-            nextStation : 200
+            nextStation : 200,
+            garage: false,
         },
         {
             id: 3,
             name: 'Patachou',
             previousStation : 200,
-            nextStation : 150
+            nextStation : 150,
+            garage: false,
         },
         {
             id: 4,
             name: 'Poire au pinot',
             previousStation : 150,
             nextStation : 150,
+            garage: false,
         },
         {
             id: 5,
             name: 'Rue de la paix',
             previousStation : 150,
             nextStation : 150,
+            garage: false,
         },
         {
             id: 6,
             name: 'Le verger des muses',
             previousStation : 150,
             nextStation : 150,
+            garage: false,
         },
         {
             id: 7,
             name: 'Tripes de peaux',
             previousStation : 150,
             nextStation : 150,
+            garage: false,
         },
         {
             id: 8,
             name: 'L\'averse Géante',
             previousStation : 150,
             nextStation : 150,
+            garage: false,
         },
         {
             id: 9,
             name: 'Belle-Isle-En-Terre',
             previousStation : 150,
             nextStation : 150,
+            garage: false,
+        },
+        {
+            id: 10,
+            name: 'Gare age',
+            previousStation : 150,
+            nextStation : 150,
+            garage: true,
         },
     ]
 }
@@ -83,6 +100,10 @@ function nextStation(id, direction) {
     }
 }
 
+function distToGarage(id,direction) {
+    curStation = line.stations[id-1]
+}
+
 function getDist(id,direction){
     if (!direction) {
         if(id+1>line.stations.length) {
@@ -102,4 +123,5 @@ function getDist(id,direction){
 
 exports.line = line
 exports.nextStation = nextStation
+exports.distToGarage = distToGarage
 exports.getDist = getDist

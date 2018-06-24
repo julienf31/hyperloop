@@ -26,14 +26,13 @@ port.on('open', function () {
     console.log('Serial Port Opend');
     port.on('data', function (data) {
         if (data[0] == 1) {
-            io.emit('close', 1, function () {
-                metro.speed(200)
-            })
+            console.log('closing door')
         }
         if (data[0] == 2) {
-            io.emit('open', 1)
+            //io.emit('open', 1)
         }
         console.log('data recieved' + data[0]);
+        console.log(data)
     });
 });
 
@@ -63,6 +62,11 @@ io.on('connection', function (socket) {
         metro.metro.emergency = true
         console.log('emmergency')
     })
+
+    socket.on('safeitude', function () {
+        metro.metro.emergency = false
+        console.log('safeitude')
+    })
 })
 
 var launch = function() {
@@ -74,7 +78,11 @@ var launch = function() {
     }
     direction = metro.metro.direction;
     currStation = line.line.stations[metro.metro.station];
-    nextStation = line.nextStation(currStation.id, direction)
+    if(metro.metro.garage){
+        nextStation = line.distToGarage(currStation.id, direction)
+    } else {
+        nextStation = line.nextStation(currStation.id, direction)
+    }
     console.log('currStation : ' + currStation.name)
     console.log('next : ' + nextStation.name)
     metro.speed(line.getDist(currStation.id, direction), io, function () {
