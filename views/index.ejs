@@ -75,6 +75,7 @@
                 <button id="emergency" type="button" class="btn btn-danger">Arrêt d'urgence</button>
                 <button id="safeitude" type="button" class="btn btn-warning" disabled>Fin de l'arret d'urgence</button>
                 <button id="garage" type="button" class="btn btn-info">Garage</button>
+                <button id="last" type="button" class="btn btn-primary">Dernier métro</button>
               </div>
 
               <div class="mt-5">
@@ -219,6 +220,12 @@
   socket.on('closing-station', function (id) {
       $("#station-status-" + id).html("❌")
       $("#station-status-" + id).attr("data-status", "false")
+  })
+
+  $("#last").on('click', function() {
+      socket.emit('last')
+      console.log('last')
+      $(this).toggleClass('active')
   })
 
   function myFunction() {

@@ -83,6 +83,10 @@ io.on('connection', function (socket) {
         line.line.stations[id].open = true;
         io.emit('opening-station', id);
     })
+
+    socket.on('last', function () {
+        metro.metro.last = !metro.metro.last
+    })
 })
 
 var launch = function () {
@@ -116,6 +120,10 @@ var launch = function () {
                 launch();
             }
         })
+    }
+    if(metro.metro.last){
+        line.line.stations[metro.metro.station].open = false;
+        io.emit('closing-station', metro.metro.station);
     }
     io.emit('start', currStation, nextStation)
 }

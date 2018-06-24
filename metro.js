@@ -17,6 +17,7 @@ class Metro {
             station: 8,
             emergency: false,
             garage: false,
+            last: false
         };
 
     }
