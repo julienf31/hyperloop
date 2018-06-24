@@ -100,8 +100,18 @@ function nextStation(id, direction) {
     }
 }
 
+function getGarage() {
+    return line.stations[line.stations.length-1]
+}
+
 function distToGarage(id,direction) {
-    curStation = line.stations[id-1]
+    curStation = line.stations[id]
+    dist = 0;
+    while(!curStation.garage){
+        dist += curStation.nextStation
+        curStation = line.stations[curStation.id+1]
+    }
+    return dist;
 }
 
 function getDist(id,direction){
@@ -124,4 +134,5 @@ function getDist(id,direction){
 exports.line = line
 exports.nextStation = nextStation
 exports.distToGarage = distToGarage
+exports.getGarage = getGarage
 exports.getDist = getDist

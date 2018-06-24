@@ -65,7 +65,8 @@
 <div class="menu">
     <button id="start" type="button" class="btn btn-success buttondem">Démarrer</button>
     <button id="emergency" type="button" class="btn btn-danger">Arrêt d'urgence</button>
-    <button id="safeitude" type="button" class="btn btn-warning">Fin de l'arret d'urgence (bouton trop long)</button>
+    <button id="safeitude" type="button" class="btn btn-warning" disabled>Fin de l'arret d'urgence (bouton trop long)</button>
+    <button id="garage" type="button" class="btn btn-info">Garage</button>
 </div>
 
 <div class="mt-5">
@@ -161,11 +162,21 @@
     $("#emergency").on('click', function () {
         socket.emit('emergency')
         console.log('emergency')
+        $(this).attr('disabled', true)
+        $("#safeitude").attr('disabled', false)
     })
 
     $("#safeitude").on('click', function () {
         socket.emit('safeitude')
         console.log('safeitude')
+        $(this).attr('disabled', true)
+        $("#emergency").attr('disabled', false)
+    })
+
+    $("#garage").on('click', function () {
+        socket.emit('garage')
+        console.log('garage')
+        $(this).toggleClass('active')
     })
 
     socket.on('start', function (current, next) {

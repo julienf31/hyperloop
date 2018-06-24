@@ -21,7 +21,6 @@ var port = new SerialPort("/dev/cu.usbmodem1421");
 const parser = port.pipe(new Readline());
 
 
-
 port.on('open', function () {
     console.log('Serial Port Opend');
     port.on('data', function (data) {
@@ -67,9 +66,14 @@ io.on('connection', function (socket) {
         metro.metro.emergency = false
         console.log('safeitude')
     })
+
+    socket.on('garage', function () {
+        metro.metro.garage = !metro.metro.garage
+        console.log('garage')
+    })
 })
 
-var launch = function() {
+var launch = function () {
     if (metro.metro.station == line.line.stations[line.line.stations.length - 1].id || metro.metro.station == line.line.stations[0].id) {
         metro.metro.direction = !metro.metro.direction
     }
@@ -78,19 +82,25 @@ var launch = function() {
     }
     direction = metro.metro.direction;
     currStation = line.line.stations[metro.metro.station];
-    if(metro.metro.garage){
-        nextStation = line.distToGarage(currStation.id, direction)
+    if (metro.metro.garage) {
+        nextStation = line.getGarage()
+        console.log('garag  : ')
+        console.log(nextStation)
+        metro.speed(line.distToGarage(currStation.id, direction), io, function () {
+            currStation = nextStation
+            metro.metro.station = currStation.id
+            console.log('currStation : ' + currStation.name)
+        })
     } else {
         nextStation = line.nextStation(currStation.id, direction)
-    }
-    console.log('currStation : ' + currStation.name)
-    metro.speed(line.getDist(currStation.id, direction), io, function () {
-        currStation = nextStation
-        metro.metro.station = currStation.id
         console.log('currStation : ' + currStation.name)
+        metro.speed(line.getDist(currStation.id, direction), io, function () {
+            currStation = nextStation
+            metro.metro.station = currStation.id
+            console.log('currStation : ' + currStation.name)
 
-    })
-
+        })
+    }
     io.emit('start', currStation, nextStation)
 }
 
