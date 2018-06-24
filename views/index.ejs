@@ -148,6 +148,11 @@
 
     $("#start").on('click', function () {
         socket.emit('start')
+        $(this).attr('disabled',true)
+    })
+
+    socket.on('arrived', function () {
+        $("#start").attr('disabled', false)
     })
 
     socket.on('dist', function (dist, percent) {
