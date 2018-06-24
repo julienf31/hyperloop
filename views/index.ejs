@@ -39,8 +39,9 @@
           }
         </style>
         <% line.stations.forEach(function (station) { %>
+          <span id="station-<%= station.id %>"> 💡 </span>
           <%= station.name %>
-            <span id="station-<%= station.id %>"> </span> <br>
+          <br>
             <% }) %>
               <style>
                 .metro {
@@ -149,6 +150,11 @@
 
   $("#start").on('click', function() {
     socket.emit('start')
+      $(this).attr('disabled', true)
+  })
+
+  socket.on('arrived', function () {
+      $("#start").attr('disabled', false)
   })
 
   socket.on('dist', function(dist, percent) {
@@ -157,7 +163,6 @@
     $('.progress-bar').css({
       width: Math.round(percent) + "%"
     });
-<<<<<<< HEAD
   })
 
 
@@ -192,84 +197,7 @@
       x.style.display = "block";
     } else {
       x.style.display = "none";
-=======
 
-    socket.on('speed', function (data, phase) {
-        color = null;
-        switch (phase) {
-            case 'acceleration':
-                color = 'green';
-                break;
-            case 'cruise':
-                color = '';
-                break;
-            case 'brake':
-                color = 'orange';
-                break;
-            case 'emergency':
-                color = 'red';
-                break;
-        }
-        $("#speed").html(Math.round(data))
-        $("#jauge").removeClass().addClass('c100 p' + Math.round((Math.round(data, -1) * 100) / 60, -1) + ' small ' + color);
-    })
-
-    socket.on('dist', function (dist, percent) {
-        $("#distance").html(Math.round(dist))
-        $("#distance-p").html(Math.round(percent))
-    })
-
-    $("#start").on('click', function () {
-        socket.emit('start')
-        $(this).attr('disabled',true)
-    })
-
-    socket.on('arrived', function () {
-        $("#start").attr('disabled', false)
-    })
-
-    socket.on('dist', function (dist, percent) {
-        $("#distance").html(Math.round(dist))
-        $("#distance-p").html(Math.round(percent))
-        $('.progress-bar').css({
-            width: Math.round(percent) + "%"
-        });
-    })
-
-
-    $("#emergency").on('click', function () {
-        socket.emit('emergency')
-        console.log('emergency')
-        $(this).attr('disabled', true)
-        $("#safeitude").attr('disabled', false)
-    })
-
-    $("#safeitude").on('click', function () {
-        socket.emit('safeitude')
-        console.log('safeitude')
-        $(this).attr('disabled', true)
-        $("#emergency").attr('disabled', false)
-    })
-
-    $("#garage").on('click', function () {
-        socket.emit('garage')
-        console.log('garage')
-        $(this).toggleClass('active')
-    })
-
-    socket.on('start', function (current, next) {
-        $("#currStation").html(current.name)
-        $("#nextStation").html(next.name)
-    })
-
-    function myFunction() {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
->>>>>>> 7b4c02110412e4e3e0844285235b07c281959b4c
     }
   }
 </script>
