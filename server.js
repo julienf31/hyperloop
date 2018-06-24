@@ -4,17 +4,19 @@ const bodyparser = require('body-parser')
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-//import { Metro } from './metro.js'
+//import * as Line from './line.js'
 
-var Metro = require('./metro.js')
+var Metro = require('./metro.js');
 
-var line = require('./line.js')
+var Line = require('./line.js');
+
+var line = new Line();
 
 var metro = new Metro(1);
 var metro2 = new Metro(2);
 
 var SerialPort = require("serialport");
-const Readline = require('@serialport/parser-readline')
+const Readline = require('@serialport/parser-readline');
 
 
 var port = new SerialPort("/dev/cu.usbmodem1421");
@@ -98,7 +100,7 @@ var launch = function () {
             currStation = nextStation
             metro.metro.station = currStation.id
             console.log('currStation : ' + currStation.name)
-            if(currStation.open){
+            if (currStation.open) {
                 io.emit('arrived', currStation.id);
             } else {
                 launch();
