@@ -90,6 +90,7 @@ module.exports = class Line {
                     previousStation: 150,
                     nextStation: 150,
                     garage: true,
+                    open: true
                 },
             ]
         }

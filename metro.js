@@ -14,7 +14,7 @@ class Metro {
             brake: -1,
             emmergecyBrake: -3,
             direction: false,  // 0 : sens de 1 à 9; 1
-            station: 1,
+            station: 8,
             emergency: false,
             garage: false,
         };

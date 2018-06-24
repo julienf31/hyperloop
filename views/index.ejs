@@ -213,10 +213,12 @@
 
   socket.on('opening-station', function (id) {
       $("#station-status-" + id).html("✅")
+      $("#station-status-" + id).attr("data-status", "true")
   })
 
   socket.on('closing-station', function (id) {
       $("#station-status-" + id).html("❌")
+      $("#station-status-" + id).attr("data-status", "false")
   })
 
   function myFunction() {

@@ -86,7 +86,7 @@ io.on('connection', function (socket) {
 })
 
 var launch = function () {
-    if (metro.metro.station == line.line.stations[line.line.stations.length - 1].id || metro.metro.station == line.line.stations[0].id) {
+    if (metro.metro.station == line.line.stations[line.line.stations.length - 2].id || metro.metro.station == line.line.stations[0].id) {
         metro.metro.direction = !metro.metro.direction
     }
     else {
