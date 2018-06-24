@@ -109,7 +109,7 @@ h4 {
 .progress-container {
   z-index: -99;
   position: relative;
-  margin: 50px auto 50px;
+  margin: 80px auto 80px;
   padding: 4px 0 0;
   width: 600px;
   height: 6px;
@@ -248,6 +248,29 @@ h4 {
 
 .buttondem:focus {
   background: #919191;
+}
+
+.imgfooter {
+  position: relative;
+  bottom: -522px;
+  width: 50%;
+  height: 222px;
+}
+
+.imgheader {
+  position: relative;
+  width: 100%;
+}
+
+.hidebutton {
+  position: relative;
+  right: -100%;
+}
+
+.imghide {
+  position: relative;
+  width: 40%;
+  right: -100%;
 }
 
 /* div {

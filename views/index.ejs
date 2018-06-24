@@ -7,16 +7,19 @@
   <body>
     <% include parts/menu.ejs %>
 
-      <!-- <button onclick="myFunction()">Cliquez pour voir notre métro</button>
+      <div class="imgdivheader">
+        <img class="imgheader" src="asset/assets/img/header.jpg" alt="footer">
+      </div>
 
-<div id="myDIV" class="hide">
-  <img src="../public/assets/metroprojet.png" alt="">
-</div> -->
-      <!-- <div class="imgheader">
-<img src="../../public/assets/img/header.jpg" alt="footer">
-</div> -->
+
       <div class="container">
+
+        <!-- <div id="myDIV" class="hide"> -->
+        <!-- </div> -->
+
+
         <h1>Liste des stations de la ligne : <%= line.name %></h1>
+
 
         <style>
           .metro {
@@ -41,7 +44,7 @@
         <% line.stations.forEach(function (station) { %>
           <span id="station-<%= station.id %>"> 💡 </span>
           <%= station.name %>
-          <br>
+            <br>
             <% }) %>
               <style>
                 .metro {
@@ -64,6 +67,8 @@
                 }
               </style>
 
+              <button class="hidebutton" onclick="myFunction()">Cliquez pour voir notre métro</button>
+              <img id="myIMG" class="imghide" src="asset/assets/img/metroprojet.png" alt="">
               <div class="menu">
                 <button id="start" type="button" class="btn btn-success buttondem">Démarrer</button>
                 <button id="emergency" type="button" class="btn btn-danger">Arrêt d'urgence</button>
@@ -85,11 +90,12 @@
 
       </div>
 
-      <!-- <div class="imgfooter">
-  <img src="../../public/assets/img/footer.jpg" alt="footer">
-</div> -->
+      <!-- <div class="imgdivfooter">
+        <img class="imgfooter" src="asset/assets/img/footer.jpg" alt="footer">
+      </div> -->
 
       <div class="progress-container">
+
         <ul>
           <div class="namemetro">Station : <span id="currStation"></span></div>
           <li class="buttonmetro"></li>
@@ -150,11 +156,11 @@
 
   $("#start").on('click', function() {
     socket.emit('start')
-      $(this).attr('disabled', true)
+    $(this).attr('disabled', true)
   })
 
-  socket.on('arrived', function () {
-      $("#start").attr('disabled', false)
+  socket.on('arrived', function() {
+    $("#start").attr('disabled', false)
   })
 
   socket.on('dist', function(dist, percent) {
@@ -192,7 +198,7 @@
   })
 
   function myFunction() {
-    var x = document.getElementById("myDIV");
+    var x = document.getElementById("myIMG");
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
