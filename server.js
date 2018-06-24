@@ -73,6 +73,16 @@ io.on('connection', function (socket) {
         metro.metro.garage = !metro.metro.garage
         console.log('garage')
     })
+
+    socket.on('close-station', function (id) {
+        line.line.stations[id].open = false;
+        io.emit('closing-station', id);
+    })
+
+    socket.on('open-station', function (id) {
+        line.line.stations[id].open = true;
+        io.emit('opening-station', id);
+    })
 })
 
 var launch = function () {
