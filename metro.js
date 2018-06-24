@@ -57,8 +57,6 @@ class Metro {
         let brake = this.metro.brake;
         let dT = .01;
         let emergencyBrake = this.metro.emmergecyBrake;
-
-        console.log(this.metro);
         var interval = setInterval(function () {
             if (curDist < dist) {
                 if (this.metro.emergency) {

@@ -98,7 +98,11 @@ var launch = function () {
             currStation = nextStation
             metro.metro.station = currStation.id
             console.log('currStation : ' + currStation.name)
-            io.emit('arrived', currStation.id);
+            if(currStation.open){
+                io.emit('arrived', currStation.id);
+            } else {
+                launch();
+            }
         })
     }
     io.emit('start', currStation, nextStation)
