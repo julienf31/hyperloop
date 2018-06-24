@@ -44,7 +44,7 @@
         <% line.stations.forEach(function (station) { %>
           <span class="stations" id="station-<%= station.id %>"></span>
           <%= station.name %>
-          <span class="stations-status" id="station-status-<%= station.id %>" data-id="<%= station.id %>" data-status="<%= station.open %>"><% if(station.open){ %> ✅ <% } else { %> ❌ <% } %></span>
+            <span class="stations-status" id="station-status-<%= station.id %>" data-id="<%= station.id %>" data-status="<%= station.open %>"><% if(station.open){ %> ✅ <% } else { %> ❌ <% } %></span>
             <br>
             <% }) %>
               <style>
@@ -92,9 +92,9 @@
 
       </div>
 
-      <!-- <div class="imgdivfooter">
+      <div class="imgdivfooter">
         <img class="imgfooter" src="asset/assets/img/footer.jpg" alt="footer">
-      </div> -->
+      </div>
 
       <div class="progress-container">
 
@@ -203,29 +203,29 @@
     $("#nextStation").html(next.name)
   })
 
-  $(".stations-status").on('click', function () {
-      let id = $(this).attr('data-id')
-      if($(this).attr('data-status') == "true"){
-          socket.emit('close-station', id)
-      } else {
-          socket.emit('open-station', id)
-      }
+  $(".stations-status").on('click', function() {
+    let id = $(this).attr('data-id')
+    if ($(this).attr('data-status') == "true") {
+      socket.emit('close-station', id)
+    } else {
+      socket.emit('open-station', id)
+    }
   })
 
-  socket.on('opening-station', function (id) {
-      $("#station-status-" + id).html("✅")
-      $("#station-status-" + id).attr("data-status", "true")
+  socket.on('opening-station', function(id) {
+    $("#station-status-" + id).html("✅")
+    $("#station-status-" + id).attr("data-status", "true")
   })
 
-  socket.on('closing-station', function (id) {
-      $("#station-status-" + id).html("❌")
-      $("#station-status-" + id).attr("data-status", "false")
+  socket.on('closing-station', function(id) {
+    $("#station-status-" + id).html("❌")
+    $("#station-status-" + id).attr("data-status", "false")
   })
 
   $("#last").on('click', function() {
-      socket.emit('last')
-      console.log('last')
-      $(this).toggleClass('active')
+    socket.emit('last')
+    console.log('last')
+    $(this).toggleClass('active')
   })
 
   function myFunction() {
