@@ -250,6 +250,15 @@ h4 {
   background: #919191;
 }
 
+/* div {
+ display:block;
+ transition: all .2s ease-out;
+}
+
+.hidden {
+ display:none;
+} */
+
 /* .navhead {
   position: relative;
   color: #FFF;
