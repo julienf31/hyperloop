@@ -42,7 +42,7 @@
           }
         </style>
         <% line.stations.forEach(function (station) { %>
-          <span id="station-<%= station.id %>"> 💡 </span>
+          <span class="stations" id="station-<%= station.id %>"></span>
           <%= station.name %>
             <br>
             <% }) %>
@@ -159,8 +159,12 @@
     $(this).attr('disabled', true)
   })
 
-  socket.on('arrived', function() {
+  socket.on('arrived', function(id) {
     $("#start").attr('disabled', false)
+    $(".stations").each(function() {
+      $(this).html('')
+    })
+    $("#station-" + id).html("💡")
   })
 
   socket.on('dist', function(dist, percent) {
