@@ -6,6 +6,15 @@
 
 <body>
 <% include parts/menu.ejs %>
+
+<!-- <button onclick="myFunction()">Cliquez pour voir notre métro</button>
+
+<div id="myDIV" class="hide">
+  <img src="../public/assets/metroprojet.png" alt="">
+</div> -->
+<!-- <div class="imgheader">
+<img src="../../public/assets/img/header.jpg" alt="footer">
+</div> -->
 <div class="container">
     <h1>Liste des stations de la ligne : <%= line.name %></h1>
 
@@ -27,52 +36,55 @@
             -ms-transition: left 1s;
             -o-transition: left 1s;
             transition: left 1s;
-        }
-    </style>
-    <% line.stations.forEach(function (station) { %>
-    <%= station.name %><span id="station-<%= station.id %>"></span><br>
+}
+</style>
+<% line.stations.forEach(function (station) { %>
+<%= station.name %>
+<span id="station-<%= station.id %>"> </span> <br>
     <% }) %>
-    <style>
-        .metro {
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-            height: 50px;
-            width: 50px;
-            background-color: red;
-            text-align: center;
-            display: block;
-            line-height: 50px;
-            position: absolute;
-            left: 0;
-            -webkit-transition: left 10s;
-            -moz-transition: left 1s;
-            -ms-transition: left 1s;
-            -o-transition: left 1s;
+    <style> .metro {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    text-align: center;
+    display: block;
+    line-height: 50px;
+    position: absolute;
+    left: 0;
+    -webkit-transition: left 10s;
+    -moz-transition: left 1s;
+    -ms-transition: left 1s;
+    -o-transition: left 1s;
+    transition: left 1s;
+}
+</style>
 
-            transition: left 1s;
-        }
-    </style>
+<div class="menu">
+    <button id="start" type="button" class="btn btn-success buttondem">Démarrer</button>
+    <button id="emergency" type="button" class="btn btn-danger">Arrêt d'urgence</button>
+    <button id="safeitude" type="button" class="btn btn-warning">Fin de l'arret d'urgence (bouton trop long)</button>
+</div>
 
-    <div class="menu">
-        <button id="start" type="button" class="btn btn-success">Démarrer</button>
-        <button id="emergency" type="button" class="btn btn-danger">Arrêt d'urgence</button>
-        <button id="safeitude" type="button" class="btn btn-warning">Fin de l'arret d'urgence (bouton trop long)</button>
-    </div>
+<div class="mt-5">
 
-    <div class="mt-5">
-
-        <div id="jauge" class="c100 small">
-            <span><span id="speed"></span> Km/h</span>
-            <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
-            </div>
+    <div id="jauge" class="c100 small">
+        <span><span id="speed"></span> Km/h</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
         </div>
-        Dist : <span id="distance"></span> m Dist : <span id="distance-p"></span> %
     </div>
+    Dist : <span id="distance"></span> m Dist : <span id="distance-p"></span> %
+</div>
 
 </div>
+
+<!-- <div class="imgfooter">
+  <img src="../../public/assets/img/footer.jpg" alt="footer">
+</div> -->
 
 <div class="progress-container">
     <ul>
@@ -86,7 +98,6 @@
 <!-- <div class="progress-bar"></div> -->
 
 <% include parts/footer.ejs %>
-
 </body>
 
 </html>
@@ -161,4 +172,14 @@
         $("#currStation").html(current.name)
         $("#nextStation").html(next.name)
     })
+
+    function myFunction() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
 </script>

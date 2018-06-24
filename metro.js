@@ -16,7 +16,7 @@ class Metro {
             direction: false,  // 0 : sens de 1 à 9; 1
             station: 1,
             emergency: false,
-            garage: true,
+            garage: false,
         };
 
     }

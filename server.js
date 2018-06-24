@@ -84,7 +84,6 @@ var launch = function() {
         nextStation = line.nextStation(currStation.id, direction)
     }
     console.log('currStation : ' + currStation.name)
-    console.log('next : ' + nextStation.name)
     metro.speed(line.getDist(currStation.id, direction), io, function () {
         currStation = nextStation
         metro.metro.station = currStation.id

@@ -1,6 +1,6 @@
 html, body {
   color: #681;
-  background: #def;
+  background: #FFF;
   min-width: 700px;
 }
 
@@ -164,7 +164,7 @@ h4 {
   transition: width 1s linear;
 }
 
-.progress-bar::after{
+.progress-bar::after {
   text-align: right;
   content: '🚃';
   font-size: 30px;
@@ -172,6 +172,7 @@ h4 {
   margin-right: -20px;
   margin-top: -4px;
 }
+
 .buttons {
   margin: 20px auto;
   padding: 10px;
@@ -230,3 +231,26 @@ h4 {
   top: 3.9em;
   left: 33.1em;
 }
+
+.buttondem {
+  background-color: #606060;
+  border-color: #606060;
+  color: #FFF;
+}
+
+.buttondem:hover {
+  background: #919191;
+}
+
+.buttondem:active {
+  background: #919191;
+}
+
+.buttondem:focus {
+  background: #919191;
+}
+
+/* .navhead {
+  position: relative;
+  color: #FFF;
+} */
