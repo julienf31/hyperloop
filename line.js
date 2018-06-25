@@ -118,14 +118,14 @@ module.exports = class Line {
         return this.line.stations[this.line.stations.length - 1]
     }
 
-    distToGarage(id, direction) {
-        curStation = this.line.stations[id]
-        dist = 0;
-        while (!curStation.garage) {
-            dist += curStation.nextStation
-            curStation = this.line.stations[curStation.id + 1]
+    distToGarage(id, direction, callback) {
+        let currStation = this.line.stations[id]
+        let dist = 0;
+        while (!currStation.garage) {
+            dist += currStation.nextStation
+            currStation = this.line.stations[currStation.id + 1]
         }
-        return dist;
+        callback(dist)
     }
 
     getDist(id, direction) {

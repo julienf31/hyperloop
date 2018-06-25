@@ -10,6 +10,8 @@ var Metro = require('./metro.js');
 
 var Line = require('./line.js');
 
+
+
 var line = new Line();
 
 var metro = new Metro(1);
@@ -102,11 +104,16 @@ var launch = function () {
         nextStation = line.getGarage()
         console.log('garag  : ')
         console.log(nextStation)
-        metro.speed(line.distToGarage(currStation.id, direction), io, function () {
-            currStation = nextStation
-            metro.metro.station = currStation.id
-            console.log('currStation : ' + currStation.name)
+        line.distToGarage(currStation.id, direction, function (dist) {
+            metro.speed(dist, io, function () {
+                currStation = nextStation
+                metro.metro.station = currStation.id
+                console.log('currStation : ' + currStation.name)
+            })
+
+
         })
+
     } else {
         nextStation = line.nextStation(currStation.id, direction)
         console.log('currStation : ' + currStation.name)
